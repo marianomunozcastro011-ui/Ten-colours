@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nuestra fábrica — Ten Colours | Hecho en León, México</title>
+<meta name="description" content="Conoce la fábrica de Ten Colours en León, Guanajuato. Producción 100% nacional: fabricamos nuestros propios textiles y suelas, con corte láser y costura automatizada." />
+<meta property="og:title" content="Ten Colours — Nuestra fábrica" />
+<meta property="og:description" content="Producción 100% mexicana en León, Gto. De la tela a la suela, fabricamos en casa." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://raw.githubusercontent.com/marianomunozcastro011-ui/Ten-colours/main/og-preview.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://raw.githubusercontent.com/marianomunozcastro011-ui/Ten-colours/main/og-preview.jpg" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="256x256" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#102b1f; --wine:#4d0011; --rose:#bd7880; --pink:#ffd9d9; --cream:#f8f1ec;
+    --ink:#241a1a; --ink-dim:#7a6f6b; --line:rgba(36,26,26,.12); --wa:#25d366;
+    --serif:'Fraunces',Georgia,serif; --sans:'Jost',system-ui,sans-serif; --maxw:1220px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#ffffff;color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+  @media(hover:none){body{cursor:auto}}
+  body.menu-open{overflow:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.02;letter-spacing:-.015em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-weight:500;font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--rose)}
+  .cur{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--wine);z-index:200;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
+  .cur-r{position:fixed;top:0;left:0;width:38px;height:38px;border-radius:50%;border:1px solid var(--rose);z-index:199;pointer-events:none;transform:translate(-50%,-50%)}
+  .cur.big{width:52px;height:52px;background:rgba(189,120,128,.18)}
+  @media(hover:none){.cur,.cur-r{display:none}}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  .logo{font-family:var(--sans);font-weight:300;letter-spacing:.4em;text-transform:uppercase;font-size:1.02rem;display:inline-flex;align-items:baseline;gap:.12em}
+  .logo b{font-weight:500}.logo .h{color:var(--rose)}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:80;padding:16px 0;background:rgba(248,241,236,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:var(--maxw);margin:0 auto;padding:0 32px;gap:16px}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a:not(.btn){font-family:var(--sans);font-weight:400;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;transition:opacity .2s;white-space:nowrap}
+  .nav-links a:not(.btn):hover{opacity:1}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:400;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:2px;transition:background .3s,color .3s,transform .15s;cursor:none;border:1px solid transparent}
+  @media(hover:none){.btn{cursor:pointer}}
+  .btn-wa{background:var(--wa);color:#fff}
+  .btn-out{border-color:currentColor}
+
+  /* HAMBURGUESA + MENU MOVIL */
+  .burger{display:none;width:44px;height:44px;border:none;background:none;padding:0;cursor:pointer;position:relative;z-index:95;flex-shrink:0}
+  .burger i{display:block;position:absolute;left:11px;width:22px;height:1.6px;background:var(--ink);border-radius:2px;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s,background .3s}
+  .burger i:nth-child(1){top:16px}
+  .burger i:nth-child(2){top:22px}
+  .burger i:nth-child(3){top:28px}
+  body.menu-open .burger i{background:var(--cream)}
+  body.menu-open .burger i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  body.menu-open .burger i:nth-child(2){opacity:0}
+  body.menu-open .burger i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .mmenu{position:fixed;inset:0;z-index:90;background:radial-gradient(125% 100% at 22% 8%,#6e0b20,#420813 52%,#26040f);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:0 30px;opacity:0;visibility:hidden;transform:translateY(-14px);transition:opacity .35s,transform .35s,visibility .35s}
+  body.menu-open .mmenu{opacity:1;visibility:visible;transform:none}
+  .mmenu a:not(.btn){font-family:var(--serif);font-weight:600;font-size:2.1rem;color:var(--cream);padding:9px 0;letter-spacing:-.01em;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+  body.menu-open .mmenu a:not(.btn){opacity:1;transform:none}
+  body.menu-open .mmenu a:nth-child(1){transition-delay:.08s}
+  body.menu-open .mmenu a:nth-child(2){transition-delay:.14s}
+  body.menu-open .mmenu a:nth-child(3){transition-delay:.20s}
+  body.menu-open .mmenu a:nth-child(4){transition-delay:.26s}
+  .mmenu .btn{margin-top:26px;padding:16px 30px;font-size:.82rem;opacity:0;transform:translateY(14px);transition:opacity .4s .32s,transform .4s .32s}
+  body.menu-open .mmenu .btn{opacity:1;transform:none}
+  .mmenu .mcontact{position:absolute;bottom:44px;left:30px;font-size:.85rem;color:rgba(248,241,236,.55);line-height:1.8}
+  .mmenu .mcontact b{color:var(--pink);font-weight:400}
+  @media(max-width:900px){.nav-links{display:none}.burger{display:block}}
+
+  /* CABECERA */
+  .head{background:radial-gradient(rgba(255,217,217,.05) 1.1px,transparent 1.1px) 0 0/24px 24px,radial-gradient(120% 130% at 85% 5%,#6e0b20,#4d0011 48%,#340210);color:var(--cream);padding:150px 0 70px;position:relative;overflow:hidden}
+  /* degradado radial en vez de filter:blur — mismo difuminado, sin costo de GPU */
+  .head .aura{position:absolute;inset:-20%;opacity:.48;pointer-events:none}
+  .head .aura i{position:absolute;width:62vw;height:62vw;border-radius:50%}
+  .head .aura .a{background:radial-gradient(circle closest-side,var(--rose),rgba(189,120,128,.48) 42%,rgba(189,120,128,0) 78%);top:-18%;left:-16%}
+  .head .aura .b{background:radial-gradient(circle closest-side,var(--wine),rgba(77,0,17,.48) 42%,rgba(77,0,17,0) 78%);bottom:-24%;right:-18%}
+  .head-in{position:relative;z-index:2}
+  .head .eyebrow{color:var(--pink)}
+  .head h1{font-size:clamp(2.8rem,7vw,5rem);margin:14px 0 12px}
+  .head h1 em{font-style:italic;color:var(--rose)}
+  .head p{color:rgba(248,241,236,.75);font-size:1.1rem;max-width:56ch}
+  .head .back{display:inline-block;margin-bottom:26px;font-family:var(--sans);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);opacity:.85;transition:opacity .2s}
+  .head .back:hover{opacity:1}
+
+  /* PROCESO */
+  section{padding:100px 0}
+  h2.sec-title{font-size:clamp(2.1rem,4.6vw,3.2rem)}
+  .sec-eyebrow{margin-bottom:14px;display:block}
+  .intro{max-width:62ch;color:var(--ink-dim);font-size:1.08rem;margin-top:18px}
+  .pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:56px}
+  .paso{border-top:2px solid var(--rose);padding-top:22px}
+  .paso b{font-family:var(--serif);font-weight:600;font-size:1.35rem;display:block;color:var(--ink);line-height:1.15}
+  .paso .num{font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;color:var(--rose);display:block;margin-bottom:10px}
+  .paso p{color:var(--ink-dim);font-size:.95rem;margin-top:8px}
+  @media(max-width:860px){.pasos{grid-template-columns:1fr 1fr;gap:28px}}
+
+  /* DATOS */
+  .datos{background:radial-gradient(rgba(255,217,217,.05) 1.1px,transparent 1.1px) 0 0/24px 24px,radial-gradient(120% 130% at 15% 95%,#63071a,#4d0011 48%,#340210);color:var(--cream)}
+  .datos .eyebrow{color:var(--pink)}
+  .datos h2{color:var(--cream)}
+  .datos .lead{color:rgba(255,217,217,.8);max-width:58ch;margin:18px 0 56px;font-size:1.08rem}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .stat{border-top:2px solid var(--rose);padding-top:22px}
+  .stat b{font-family:var(--serif);font-size:3rem;display:block;line-height:1;color:var(--cream)}
+  .stat span{font-size:.92rem;color:rgba(255,217,217,.72);margin-top:12px;display:block}
+  @media(max-width:820px){.stats{grid-template-columns:1fr 1fr;gap:28px}}
+
+  /* GALERIA */
+  .galeria{background:var(--cream)}
+  .gal-head{margin-bottom:44px}
+  .gal-head p{color:var(--ink-dim);margin-top:12px;max-width:56ch}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+  .shot{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:4/3;display:block;cursor:pointer}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s}
+  .shot:hover img{transform:scale(1.05)}
+  .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 13px;background:linear-gradient(transparent,rgba(38,4,15,.82));color:var(--cream);font-family:var(--sans);font-size:.85rem;letter-spacing:.02em}
+  /* marco vacío elegante mientras no hay fotos */
+  .shot.vacio{background:linear-gradient(135deg,#f2e9e4,#e8dcd6);display:grid;place-items:center;cursor:default;border-style:dashed;border-color:rgba(77,0,17,.18)}
+  .shot.vacio span{font-family:var(--sans);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(77,0,17,.42);text-align:center;padding:0 14px;line-height:1.9}
+  .shot.vacio span b{display:block;font-family:var(--serif);font-size:1.5rem;letter-spacing:-.01em;text-transform:none;color:rgba(77,0,17,.3);font-weight:600;margin-bottom:4px}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:300;background:rgba(20,4,10,.86);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;cursor:auto}
+  .lb.open{display:flex}
+  .lb-inner{position:relative;max-width:960px;width:100%}
+  .lb-inner img{width:100%;display:block;border-radius:10px;background:#fff;max-height:78vh;object-fit:contain}
+  .lb-cap{color:var(--cream);font-family:var(--sans);font-size:.95rem;text-align:center;margin-top:14px}
+  .lb-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.85);border:none;font-size:1.4rem;cursor:pointer;display:grid;place-items:center;color:var(--ink);z-index:2}
+  .lb-prev{left:-56px}.lb-next{right:-56px}
+  @media(max-width:1100px){.lb-prev{left:8px}.lb-next{right:8px}}
+
+  .cta{background:#fff;text-align:center}
+  .cta .eyebrow{display:block;margin-bottom:14px}
+  .cta h2{font-size:clamp(2.2rem,5.5vw,3.6rem);margin-bottom:16px}
+  .cta h2 em{font-style:italic;color:var(--wine)}
+  .cta p{color:var(--ink-dim);max-width:46ch;margin:0 auto 32px;font-size:1.06rem}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta .contact-line{margin-top:30px;font-size:.92rem;color:var(--ink-dim)}
+
+  footer{background:var(--pine);color:rgba(248,241,236,.7);padding:48px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .foot .logo{color:var(--cream)}.foot small{font-size:.82rem}
+
+  .fab{position:fixed;right:22px;bottom:22px;z-index:70;display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;padding:14px 20px;border-radius:100px;font-family:var(--sans);font-weight:500;font-size:.85rem;letter-spacing:.03em;box-shadow:0 14px 34px -8px rgba(37,211,102,.55);transition:transform .2s,opacity .3s;cursor:none}
+  .fab:hover{transform:translateY(-3px)}
+  body.menu-open .fab{opacity:0;pointer-events:none}
+  @media(hover:none){.fab{cursor:pointer}}
+  @media(max-width:520px){.fab span{display:none}.fab{padding:15px;border-radius:50%}}
+
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    .head{padding:106px 0 44px}
+    .head h1{font-size:clamp(2.2rem,10vw,3.2rem)}
+    .head p{font-size:.98rem}
+    .head .back{margin-bottom:18px}
+    section{padding:60px 0}
+    h2.sec-title{font-size:clamp(1.9rem,7.5vw,2.5rem)}
+    .intro{font-size:1rem}
+    .pasos{margin-top:36px;gap:24px}
+    .paso b{font-size:1.15rem}
+    .datos .lead{margin:16px 0 34px;font-size:1rem}
+    .stat b{font-size:2.3rem}
+    .gal-head{margin-bottom:26px}
+    .shot .cap{font-size:.74rem;padding:20px 11px 10px}
+    .shot.vacio span{font-size:.6rem;letter-spacing:.16em}
+    .shot.vacio span b{font-size:1.15rem}
+    .mmenu a:not(.btn){font-size:1.85rem}
+  }
+  :focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.2s!important}.reveal{opacity:1;transform:none}body{cursor:auto}.cur,.cur-r{display:none}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-r" id="curR"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html#top" class="logo">Ten&nbsp;<b>Colours</b>&nbsp;<span class="h">♥</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="coleccion.html">Colección</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#nosotros">Nosotros</a>
+  <a href="coleccion.html">Colección</a>
+  <a href="index.html#encuentranos">Encuéntranos</a>
+  <a class="btn btn-wa" href="https://wa.me/524771390274?text=Hola%20Ten%20Colours,%20me%20interesa%20cotizar%20mayoreo"><span>Cotiza mayoreo</span></a>
+  <div class="mcontact">tencolours10@hotmail.com<br><b>477 139 0274</b> · León, Gto.</div>
+</div>
+
+<a class="fab" data-mag href="https://wa.me/524771390274?text=Hola%20Ten%20Colours,%20me%20interesa%20cotizar%20mayoreo" aria-label="Cotiza por WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3A2.8 2.8 0 0 0 6 8.9c0 1.7 1.2 3.3 1.4 3.5s2.4 3.7 5.9 5.1c2.1.8 2.5.7 2.9.6s1.4-.5 1.6-1.1.2-1 .1-1.1-.3-.2-.5-.3z"/></svg>
+  <span>Cotiza por WhatsApp</span>
+</a>
+
+<header class="head">
+  <div class="aura"><i class="a"></i><i class="b"></i></div>
+  <div class="wrap head-in">
+    <a href="index.html" class="back">← Volver al inicio</a>
+    <span class="eyebrow">Nuestra fábrica · León, Gto.</span>
+    <h1>De la tela a la suela,<br><em>hecho en casa.</em></h1>
+    <p>Somos de las pocas marcas mexicanas que controla su producción de principio a fin. Esa integración es la razón de nuestra calidad — y de nuestro precio.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow sec-eyebrow reveal">El proceso</span>
+    <h2 class="sec-title reveal">Cada par pasa por nuestras manos.</h2>
+    <p class="intro reveal">No maquilamos ni revendemos. Fabricamos nuestros propios textiles y nuestras propias suelas, cortamos con láser y armamos en planta. Por eso podemos garantizar cada par que sale.</p>
+    <div class="pasos">
+      <div class="paso reveal"><span class="num">01</span><b>Textil propio</b><p>Producimos la tela en casa, con el color y la textura exactos que pide cada modelo.</p></div>
+      <div class="paso reveal"><span class="num">02</span><b>Corte láser</b><p>Corte de precisión que elimina desperdicio y garantiza que cada pieza salga idéntica.</p></div>
+      <div class="paso reveal"><span class="num">03</span><b>Costura automatizada</b><p>Maquinaria de costura programada para un acabado uniforme, par tras par.</p></div>
+      <div class="paso reveal"><span class="num">04</span><b>Suela y montado</b><p>Fabricamos la suela y montamos el tenis completo antes del control de calidad final.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="datos">
+  <div class="wrap">
+    <span class="eyebrow sec-eyebrow reveal">En números</span>
+    <h2 class="sec-title reveal">30 años haciendo calzado en México.</h2>
+    <p class="lead reveal">Tres décadas de oficio en la capital del calzado mexicano, con una planta que crece al ritmo de nuestras clientas.</p>
+    <div class="stats">
+      <div class="stat reveal"><b data-count="30">30</b><span>años fabricando calidad</span></div>
+      <div class="stat reveal"><b data-count="100" data-suf="%">100%</b><span>producción nacional en León, Gto.</span></div>
+      <div class="stat reveal"><b>Propia</b><span>fabricación de textiles y suelas</span></div>
+      <div class="stat reveal"><b>Láser</b><span>corte de precisión y costura automatizada</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="galeria" id="galeria">
+  <div class="wrap">
+    <div class="gal-head reveal">
+      <span class="eyebrow sec-eyebrow">Por dentro</span>
+      <h2 class="sec-title">Así se ve nuestra planta.</h2>
+      <p>Un recorrido por las áreas donde nacen los tenis Ten Colours.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow reveal">¿Quieres vender Ten Colours?</span>
+    <h2 class="reveal">Fabricamos nosotros. <em>Tú solo vendes.</em></h2>
+    <p class="reveal">Producción propia, entrega directa y respaldo de 30 años. Cotiza mayoreo y te mandamos el catálogo completo.</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-wa" data-mag href="https://wa.me/524771390274?text=Hola%20Ten%20Colours,%20me%20interesa%20cotizar%20mayoreo"><span>WhatsApp: 477 139 0274</span></a>
+      <a class="btn btn-out" data-mag style="border-color:var(--wine);color:var(--wine)" href="coleccion.html"><span>Ver la colección</span></a>
+    </div>
+    <p class="contact-line reveal">tencolours10@hotmail.com · León, Guanajuato · México</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="index.html#top" class="logo">Ten&nbsp;<b>Colours</b>&nbsp;<span class="h">♥</span></a>
+    <small>Tenis urbanos para mujer · Hecho en México · © 2026 Ten Colours</small>
+  </div>
+</footer>
+
+<div class="lb" id="lb">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose" aria-label="Cerrar">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Anterior">‹</button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Siguiente">›</button>
+    <img id="lbImg" src="" alt="" />
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   FOTOS DE LA FÁBRICA
+   ------------------------------------------------------------
+   Para agregar fotos: sube los archivos a la carpeta "fabrica/"
+   del repositorio y agrégalos a esta lista. Nada más.
+   Ejemplo:
+     {archivo:"fabrica/f-01.jpg", titulo:"Área de corte láser"},
+   Mientras la lista esté vacía se muestran marcos elegantes
+   con el nombre de cada área (la página nunca se ve rota).
+   ============================================================ */
+const FOTOS = [
+  // {archivo:"fabrica/f-01.jpg", titulo:"Área de corte láser"},
+  // {archivo:"fabrica/f-02.jpg", titulo:"Producción de textil"},
+  // {archivo:"fabrica/f-03.jpg", titulo:"Costura automatizada"},
+];
+
+/* Áreas que se muestran como marcos mientras no hay fotos */
+const AREAS = ["Producción de textil","Corte láser","Costura","Fabricación de suela","Montado","Control de calidad"];
+
+const grid=document.getElementById('grid');
+if(FOTOS.length){
+  grid.innerHTML=FOTOS.map((f,i)=>
+    `<a class="shot reveal" data-zoom="${i}"><img src="${f.archivo}" alt="${f.titulo||'Fábrica Ten Colours'}" loading="lazy" decoding="async"><span class="cap">${f.titulo||''}</span></a>`
+  ).join("");
+}else{
+  grid.innerHTML=AREAS.map(a=>
+    `<div class="shot vacio reveal"><span><b>${a}</b>Foto próximamente</span></div>`
+  ).join("");
+}
+
+/* menú móvil */
+(function(){
+  const b=document.getElementById('burger'), m=document.getElementById('mmenu');
+  function close(){document.body.classList.remove('menu-open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Abrir menú');}
+  b.addEventListener('click',()=>{
+    const open=document.body.classList.toggle('menu-open');
+    b.setAttribute('aria-expanded',open?'true':'false');
+    b.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');
+  });
+  m.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+
+/* cursor */
+(function(){
+  if(matchMedia('(hover:none)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const c=document.getElementById('cur'),r=document.getElementById('curR');
+  let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y;
+  addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;c.style.left=x+'px';c.style.top=y+'px';});
+  (function loop(){rx+=(x-rx)*.16;ry+=(y-ry)*.16;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.shot,[data-mag]'))c.classList.add('big');});
+  document.addEventListener('mouseout',e=>{if(e.target.closest('a,button,.shot,[data-mag]'))c.classList.remove('big');});
+})();
+
+/* lightbox de la galería */
+let lbN=0;
+const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
+function openLB(i){
+  if(!FOTOS.length)return;
+  lbN=i; const f=FOTOS[i];
+  lbImg.src=f.archivo; lbImg.alt=f.titulo||''; lbCap.textContent=f.titulo||'';
+  lb.classList.add('open');
+}
+function closeLB(){lb.classList.remove('open');}
+function stepLB(d){if(!FOTOS.length)return;lbN=(lbN+d+FOTOS.length)%FOTOS.length;openLB(lbN);}
+grid.addEventListener('click',e=>{const z=e.target.closest('[data-zoom]');if(z)openLB(+z.dataset.zoom);});
+document.getElementById('lbClose').addEventListener('click',closeLB);
+document.getElementById('lbPrev').addEventListener('click',()=>stepLB(-1));
+document.getElementById('lbNext').addEventListener('click',()=>stepLB(1));
+lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
+addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();else if(e.key==='ArrowLeft')stepLB(-1);else if(e.key==='ArrowRight')stepLB(1);});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=((i%6)*0.05)+'s';io.observe(el);});
+
+/* count up */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target,end=+el.dataset.count,suf=el.dataset.suf||'';let t0=performance.now();(function t(n){const p=Math.min((n-t0)/1100,1),v=Math.round(end*(1-Math.pow(1-p,3)));el.textContent=v+suf;if(p<1)requestAnimationFrame(t);})(t0);cio.unobserve(el);}}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* magnetic (solo escritorio) */
+if(!matchMedia('(hover:none)').matches){
+  document.querySelectorAll('[data-mag]').forEach(el=>{
+    el.addEventListener('mousemove',e=>{const b=el.getBoundingClientRect();el.style.transform=`translate(${(e.clientX-b.left-b.width/2)*.3}px,${(e.clientY-b.top-b.height/2)*.4}px)`;});
+    el.addEventListener('mouseleave',()=>el.style.transform='');
+  });
+}
+</script>
+</body>
+</html>
