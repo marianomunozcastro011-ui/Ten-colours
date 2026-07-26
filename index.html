@@ -147,30 +147,35 @@
   .sec-eyebrow{margin-bottom:16px;display:block}
   h2.sec-title{font-size:clamp(2.3rem,4.8vw,3.6rem)}
 
+  /* NOSOTROS — en vino, para alternar con el catálogo (blanco) que va antes */
+  #nosotros{background:radial-gradient(rgba(255,217,217,.05) 1.1px,transparent 1.1px) 0 0/24px 24px,radial-gradient(120% 130% at 80% 8%,#63071a,#4d0011 48%,#340210);color:var(--cream)}
+  #nosotros .eyebrow{color:var(--pink)}
   .about{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-  .about .big{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.12;font-weight:600}
-  .about .big em{font-style:italic;color:var(--wine)}
-  .about p.sub{color:var(--ink-dim);margin-top:22px;font-size:1.06rem}
+  .about .big{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.12;font-weight:600;color:var(--cream)}
+  .about .big em{font-style:italic;color:var(--rose)}
+  .about p.sub{color:rgba(248,241,236,.7);margin-top:22px;font-size:1.06rem}
   .mv{display:flex;flex-direction:column;gap:16px}
-  .mv .card{border:1px solid var(--line);border-radius:6px;padding:24px 26px;transition:transform .4s,background .4s,color .4s;background:transparent}
-  .mv .card:hover{transform:translateX(8px);background:var(--pine);color:var(--cream)}
-  .mv .card:hover p{color:rgba(248,241,236,.75)}
-  .mv .card h3{font-size:1.55rem;margin-bottom:6px}
-  .mv .card p{color:var(--ink-dim);font-size:.98rem;margin:0;transition:color .4s}
+  .mv .card{border:1px solid rgba(248,241,236,.22);border-radius:6px;padding:24px 26px;transition:transform .4s,background .4s,color .4s,border-color .4s;background:transparent}
+  .mv .card:hover{transform:translateX(8px);background:var(--cream);border-color:var(--cream);color:var(--wine)}
+  .mv .card h3{font-size:1.55rem;margin-bottom:6px;color:var(--cream);transition:color .4s}
+  .mv .card:hover h3{color:var(--wine)}
+  .mv .card p{color:rgba(248,241,236,.62);font-size:.98rem;margin:0;transition:color .4s}
+  .mv .card:hover p{color:rgba(77,0,17,.78)}
   @media(max-width:820px){.about{grid-template-columns:1fr;gap:40px}}
 
-  .fabrica{background:radial-gradient(rgba(255,217,217,.05) 1.1px,transparent 1.1px) 0 0/24px 24px,radial-gradient(120% 130% at 85% 5%,#6e0b20,#4d0011 48%,#340210);color:var(--pink)}
+  /* FÁBRICA — en crema, para alternar con Nosotros (vino) y Encuéntranos (vino) */
+  .fabrica{background:var(--cream);color:var(--ink)}
   .fabrica .eyebrow{color:var(--rose)}
-  .fabrica h2{color:var(--cream)}
-  .fabrica .lead{color:rgba(255,217,217,.8);max-width:58ch;margin:18px 0 56px;font-size:1.1rem}
+  .fabrica h2{color:var(--ink)}
+  .fabrica .lead{color:var(--ink-dim);max-width:58ch;margin:18px 0 56px;font-size:1.1rem}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
   .stat{border-top:2px solid var(--rose);padding-top:22px}
-  .stat b{font-family:var(--serif);font-size:3rem;display:block;line-height:1;color:var(--cream)}
-  .stat span{font-size:.92rem;color:rgba(255,217,217,.72);margin-top:12px;display:block}
+  .stat b{font-family:var(--serif);font-size:3rem;display:block;line-height:1;color:var(--wine)}
+  .stat span{font-size:.92rem;color:var(--ink-dim);margin-top:12px;display:block}
   .fabrica .fab-cta{margin-top:56px}
-  .fabrica .fab-cta .btn{border-color:var(--pink);color:var(--pink)}
-  .fabrica .fab-cta .btn:hover{background:var(--pink)}
-  .fabrica .fab-cta .btn:hover span{color:var(--wine)}
+  .fabrica .fab-cta .btn{border-color:var(--wine);color:var(--wine)}
+  .fabrica .fab-cta .btn:hover{background:var(--wine)}
+  .fabrica .fab-cta .btn:hover span{color:var(--pink)}
   @media(max-width:820px){.stats{grid-template-columns:1fr 1fr;gap:28px}}
 
   /* COLECCION teaser */
