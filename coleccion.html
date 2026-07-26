@@ -100,12 +100,26 @@
   .head .tip svg{flex-shrink:0;opacity:.8}
 
   section{padding:70px 0 96px}
-  /* FILTROS */
-  .filtros{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:34px}
-  .filtros button{font-family:var(--sans);font-weight:400;font-size:.82rem;letter-spacing:.06em;padding:10px 20px;border:1px solid var(--line);background:#fff;color:var(--ink-dim);border-radius:100px;cursor:pointer;transition:background .25s,color .25s,border-color .25s;white-space:nowrap}
-  .filtros button:hover{border-color:var(--wine);color:var(--ink)}
-  .filtros button.on{background:var(--wine);border-color:var(--wine);color:var(--pink)}
-  .filtros .cuenta{margin-left:auto;font-family:var(--sans);font-size:.85rem;color:var(--ink-dim);white-space:nowrap}
+  /* FILTROS — plegados tras un botón; dos dimensiones: tipo y color */
+  .fbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .fbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:400;font-size:.84rem;letter-spacing:.06em;padding:11px 22px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:100px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+  .fbtn:hover{border-color:var(--wine)}
+  .fbtn.activo{background:var(--wine);border-color:var(--wine);color:var(--pink)}
+  .fbtn .chev{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .fbtn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .fbadge{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;border-radius:100px;background:var(--wine);color:var(--pink);font-size:.68rem;font-weight:500;line-height:1}
+  .fbtn.activo .fbadge{background:var(--pink);color:var(--wine)}
+  .flimpiar{background:none;border:none;color:var(--ink-dim);font-family:var(--sans);font-size:.82rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
+  .flimpiar:hover{color:var(--wine)}
+  .fbar .cuenta{margin-left:auto;font-family:var(--sans);font-size:.85rem;color:var(--ink-dim);white-space:nowrap}
+  .filtros{max-height:0;overflow:hidden;opacity:0;margin-bottom:0;transition:max-height .38s cubic-bezier(.2,.8,.2,1),opacity .26s,margin-bottom .38s}
+  .filtros.abierto{max-height:280px;opacity:1;margin-bottom:32px}
+  .fila{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .fila:last-child{margin-bottom:0}
+  .fila .rot{font-family:var(--sans);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);width:52px;flex-shrink:0}
+  .fila button{font-family:var(--sans);font-weight:400;font-size:.82rem;letter-spacing:.06em;padding:10px 20px;border:1px solid var(--line);background:#fff;color:var(--ink-dim);border-radius:100px;cursor:pointer;transition:background .25s,color .25s,border-color .25s;white-space:nowrap}
+  .fila button:hover{border-color:var(--wine);color:var(--ink)}
+  .fila button.on{background:var(--wine);border-color:var(--wine);color:var(--pink)}
   .card-p.oculto{display:none}
   .vacio-msg{display:none;text-align:center;color:var(--ink-dim);padding:50px 0}
   .vacio-msg.on{display:block}
@@ -187,11 +201,15 @@
     .head .avail{gap:9px;margin-top:18px}
     .head .avail .lbl{font-size:.72rem;width:100%}
     .head .avail i{font-size:.72rem;padding:5px 11px}
-    /* los filtros se deslizan de lado en celular en vez de amontonarse */
-    .filtros{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 22px;padding:0 16px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-    .filtros::-webkit-scrollbar{display:none}
-    .filtros button{font-size:.76rem;padding:9px 15px}
-    .filtros .cuenta{display:none}
+    /* cada fila de filtros se desliza de lado con el pulgar */
+    .fbar{gap:10px;margin-bottom:14px}
+    .fbtn{font-size:.78rem;padding:10px 18px}
+    .fbar .cuenta{font-size:.78rem}
+    .filtros.abierto{margin-bottom:24px}
+    .fila{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 8px;padding:0 16px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .fila::-webkit-scrollbar{display:none}
+    .fila .rot{width:auto;padding-right:2px}
+    .fila button{font-size:.76rem;padding:9px 15px}
   }
   :focus-visible{outline:2px solid var(--rose);outline-offset:3px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.2s!important}.reveal{opacity:1;transform:none}body{cursor:auto}.cur,.cur-r{display:none}}
@@ -242,6 +260,16 @@
 
 <section>
   <div class="wrap">
+    <div class="fbar">
+      <button class="fbtn" id="fbtn" aria-expanded="false" aria-controls="filtros">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+        Filtros
+        <span class="fbadge" id="fbadge" hidden>0</span>
+        <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <button class="flimpiar" id="flimpiar" hidden>Limpiar filtros</button>
+      <span class="cuenta" id="cuenta"></span>
+    </div>
     <div class="filtros" id="filtros"></div>
     <div class="grid" id="grid"></div>
     <p class="vacio-msg" id="vacioMsg">No hay modelos en esta categoría.</p>
@@ -312,55 +340,109 @@
    Si agregas modelos nuevos, súmalos aquí con sus dos etiquetas.
    ============================================================ */
 const TAGS={
-  "01":["tenis","negro"],  "02":["tenis","blanco"], "03":["tenis","rosa"],
-  "04":["tenis","rosa"],   "05":["tenis","beige"],  "06":["flat","color"],
-  "07":["tenis","rosa"],   "08":["flat","rosa"],    "09":["flat","negro"],
-  "10":["flat","beige"],   "11":["flat","gris"],    "12":["flat","beige"],
-  "13":["flat","negro"],   "14":["tenis","rosa"],   "15":["tenis","blanco"],
-  "16":["tenis","blanco"], "17":["tenis","gris"],   "18":["tenis","gris"],
-  "19":["tenis","negro"],  "20":["tenis","rosa"],   "21":["flat","blanco"],
-  "22":["tenis","color"],  "23":["tenis","negro"],  "24":["tenis","rosa"],
-  "25":["tenis","beige"],  "26":["tenis","blanco"], "27":["tenis","negro"],
-  "28":["tenis","blanco"], "29":["tenis","color"],  "30":["tenis","negro"],
-  "31":["tenis","negro"],  "32":["tenis","beige"],  "33":["flat","beige"],
-  "34":["tenis","gris"],   "35":["tenis","beige"],  "36":["tenis","beige"],
-  "37":["tenis","rosa"],   "38":["tenis","rosa"]
+  "01":{tipo:["tenis","plataforma"], color:"negro"},
+  "02":{tipo:["tenis"],              color:"blanco"},
+  "03":{tipo:["tenis","plataforma"], color:"rosa"},
+  "04":{tipo:["tenis","plataforma"], color:"rosa"},
+  "05":{tipo:["tenis"],              color:"beige"},
+  "06":{tipo:["flat"],               color:"color"},
+  "07":{tipo:["tenis"],              color:"rosa"},
+  "08":{tipo:["flat"],               color:"rosa"},
+  "09":{tipo:["flat"],               color:"negro"},
+  "10":{tipo:["flat"],               color:"beige"},
+  "11":{tipo:["flat"],               color:"gris"},
+  "12":{tipo:["flat"],               color:"beige"},
+  "13":{tipo:["flat"],               color:"negro"},
+  "14":{tipo:["tenis","plataforma"], color:"rosa"},
+  "15":{tipo:["tenis","plataforma"], color:"blanco"},
+  "16":{tipo:["tenis","plataforma"], color:"blanco"},
+  "17":{tipo:["tenis","plataforma"], color:"gris"},
+  "18":{tipo:["tenis","plataforma"], color:"gris"},
+  "19":{tipo:["tenis","plataforma"], color:"negro"},
+  "20":{tipo:["tenis","plataforma"], color:"rosa"},
+  "21":{tipo:["flat"],               color:"blanco"},
+  "22":{tipo:["tenis","plataforma"], color:"color"},
+  "23":{tipo:["tenis","plataforma"], color:"negro"},
+  "24":{tipo:["tenis","plataforma"], color:"rosa"},
+  "25":{tipo:["tenis","plataforma"], color:"beige"},
+  "26":{tipo:["tenis"],              color:"blanco"},
+  "27":{tipo:["tenis","plataforma"], color:"negro"},
+  "28":{tipo:["tenis","plataforma"], color:"blanco"},
+  "29":{tipo:["tenis"],              color:"color"},
+  "30":{tipo:["tenis","plataforma"], color:"negro"},
+  "31":{tipo:["tenis","plataforma"], color:"negro"},
+  "32":{tipo:["tenis"],              color:"beige"},
+  "33":{tipo:["flat"],               color:"beige"},
+  "34":{tipo:["tenis"],              color:"gris"},
+  "35":{tipo:["tenis"],              color:"beige"},
+  "36":{tipo:["tenis","plataforma"], color:"beige"},
+  "37":{tipo:["tenis","plataforma"], color:"rosa"},
+  "38":{tipo:["tenis","plataforma"], color:"rosa"}
 };
-const FILTROS=[
-  ["todos","Todos"],["tenis","Tenis"],["flat","Flats"],
-  ["negro","Negros"],["blanco","Blancos"],["rosa","Rosas"],
-  ["beige","Beige y café"],["gris","Grises"],["color","A color"]
-];
+const F_TIPO =[["todos","Todos"],["tenis","Tenis"],["plataforma","Plataforma"],["flat","Flats"]];
+const F_COLOR=[["todos","Todos"],["negro","Negros"],["blanco","Blancos"],["rosa","Rosas"],["beige","Beige y café"],["gris","Grises"],["color","A color"]];
 
 /* construir la reja */
 const N=38, WA="524771390274";
 let html="";
 for(let i=1;i<=N;i++){
   const n=String(i).padStart(2,'0'), nombre="Modelo "+n, base=`catalogo/m-${n}`;
-  html+=`<article class="card-p reveal" data-tilt data-n="${n}" data-tags="${(TAGS[n]||[]).join(' ')}"><button class="sel" data-sel="${n}" aria-label="Seleccionar">✓</button><div class="img zoomable" data-zoom="${i}"><img src="${base}.webp" onerror="this.onerror=null;this.src='${base}.jpg'" alt="${nombre}" loading="lazy" decoding="async" width="620" height="620"></div><div class="b"><h3>${nombre}</h3></div></article>`;
+  const t=TAGS[n]||{tipo:[],color:""};
+  html+=`<article class="card-p reveal" data-tilt data-n="${n}" data-tipo="${t.tipo.join(' ')}" data-color="${t.color}"><button class="sel" data-sel="${n}" aria-label="Seleccionar">✓</button><div class="img zoomable" data-zoom="${i}"><img src="${base}.webp" onerror="this.onerror=null;this.src='${base}.jpg'" alt="${nombre}" loading="lazy" decoding="async" width="620" height="620"></div><div class="b"><h3>${nombre}</h3></div></article>`;
 }
 document.getElementById('grid').innerHTML=html;
 
 /* ===== Filtros ===== */
 const filtrosEl=document.getElementById('filtros'), vacioMsg=document.getElementById('vacioMsg');
-let filtroActivo="todos";
-filtrosEl.innerHTML=FILTROS.map(([k,t])=>`<button data-f="${k}"${k===filtroActivo?' class="on"':''}>${t}</button>`).join("")
-  +`<span class="cuenta" id="cuenta"></span>`;
-const cuentaEl=document.getElementById('cuenta');
+let fTipo="todos", fColor="todos";
+
+function fila(rot,dim,lista,activo){
+  return `<div class="fila" data-dim="${dim}"><span class="rot">${rot}</span>`
+    + lista.map(([k,t])=>`<button data-v="${k}"${k===activo?' class="on"':''}>${t}</button>`).join("")
+    + `</div>`;
+}
+filtrosEl.innerHTML = fila("Tipo","tipo",F_TIPO,fTipo) + fila("Color","color",F_COLOR,fColor);
+
+const cuentaEl=document.getElementById('cuenta'),
+      fbtn=document.getElementById('fbtn'),
+      fbadge=document.getElementById('fbadge'),
+      flimpiar=document.getElementById('flimpiar');
+
 function aplicaFiltro(){
   let visibles=0;
   document.querySelectorAll('.card-p').forEach(c=>{
-    const ok = filtroActivo==="todos" || c.dataset.tags.split(' ').includes(filtroActivo);
+    const okTipo  = fTipo==="todos"  || c.dataset.tipo.split(' ').includes(fTipo);
+    const okColor = fColor==="todos" || c.dataset.color===fColor;
+    const ok = okTipo && okColor;
     c.classList.toggle('oculto',!ok);
     if(ok) visibles++;
   });
   cuentaEl.textContent = visibles===N ? `${N} modelos` : `${visibles} de ${N} modelos`;
   vacioMsg.classList.toggle('on',visibles===0);
+  // el botón avisa cuántos filtros hay puestos, aunque el panel esté cerrado
+  const activos = (fTipo!=="todos"?1:0) + (fColor!=="todos"?1:0);
+  fbtn.classList.toggle('activo',activos>0);
+  fbadge.hidden = activos===0;
+  fbadge.textContent = activos;
+  flimpiar.hidden = activos===0;
 }
+/* abrir y cerrar el panel */
+fbtn.addEventListener('click',()=>{
+  const abierto = filtrosEl.classList.toggle('abierto');
+  fbtn.setAttribute('aria-expanded', abierto?'true':'false');
+});
+flimpiar.addEventListener('click',()=>{
+  fTipo="todos"; fColor="todos";
+  filtrosEl.querySelectorAll('.fila').forEach(f=>{
+    f.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.v==="todos"));
+  });
+  aplicaFiltro();
+});
 filtrosEl.addEventListener('click',e=>{
-  const b=e.target.closest('[data-f]'); if(!b)return;
-  filtroActivo=b.dataset.f;
-  filtrosEl.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  const b=e.target.closest('[data-v]'); if(!b)return;
+  const f=b.closest('.fila'), dim=f.dataset.dim;
+  if(dim==="tipo") fTipo=b.dataset.v; else fColor=b.dataset.v;
+  f.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
   aplicaFiltro();
 });
 aplicaFiltro();
